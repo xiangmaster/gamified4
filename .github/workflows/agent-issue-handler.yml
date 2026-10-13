@@ -52,6 +52,8 @@ jobs:
       - name: Run agent CLI tool
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          ANTHROPIC_BASE_URL: https://api.openlux.ai
+          ANTHROPIC_MODEL: claude-sonnet-4-6
         run: |
           # Create a prompt that includes the context and best practices
           cat > agent_prompt.txt << 'EOL'
@@ -84,7 +86,7 @@ jobs:
         run: |
           git add .
           git commit -m "Auto-changes from issue #${{ github.event.issue.number }}"
-          
+      
       - name: Push changes
         run: |
           git push origin agent/issue-${{ github.event.issue.number }}
